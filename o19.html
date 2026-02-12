@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For 6avi 💙</title>
+
+<style>
+body{
+  margin:0;
+  padding:0;
+  background:#cfefff;
+  font-family:Arial, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+  text-align:center;
+}
+
+.container{
+  padding:40px;
+}
+
+h1{
+  margin:0;
+  font-size:28px;
+  color:#0077b6;
+}
+
+h2{
+  margin:15px 0 30px 0;
+  font-weight:normal;
+  color:#333;
+}
+
+.buttons{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+button{
+  padding:12px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+#yesBtn{
+  background:#4fb3ff;
+  color:white;
+  font-weight:bold;
+}
+
+#noBtn{
+  background:white;
+  color:#333;
+  position:relative;
+}
+
+#message{
+  margin-top:25px;
+  font-size:22px;
+  color:#0077b6;
+}
+
+.heart,.star{
+  position:absolute;
+  bottom:-20px;
+  animation:floatUp 4s linear forwards;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-800px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>6avi 💙</h1>
+  <h2>Will you be my Valentine this year?</h2>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💙</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <div id="message"></div>
+</div>
+
+<audio id="bgMusic" src="song.mp3"></audio>
+
+<script>
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const message=document.getElementById("message");
+const music=document.getElementById("bgMusic");
+
+let noCount=0;
+
+// NO يتحرك طول الوقت لوحده
+setInterval(()=>{
+  const x=Math.random()*200-100;
+  const y=Math.random()*120-60;
+  const rotate=Math.random()*360;
+  noBtn.style.transform=`translate(${x}px,${y}px) rotate(${rotate}deg)`;
+},300);
+
+noBtn.addEventListener("click",()=>{
+  noCount++;
+  if(noCount>=5){
+    message.innerText="Are you messing with me?";
+  }
+});
+
+yesBtn.addEventListener("click",()=>{
+  music.play();
+  message.innerText="I know it 💙";
+
+  // قلوب
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💙";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+20)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+  },300);
+
+  // نجوم
+  setInterval(()=>{
+    const star=document.createElement("div");
+    star.className="star";
+    star.innerHTML="✨";
+    star.style.left=Math.random()*100+"vw";
+    star.style.fontSize=(Math.random()*15+15)+"px";
+    document.body.appendChild(star);
+    setTimeout(()=>star.remove(),4000);
+  },500);
+});
+</script>
+
+</body>
+</html>
